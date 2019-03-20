@@ -20,6 +20,8 @@ ln -s ~/.config/nvim/plugged/vim-bspwm-navigator/change-split-or-window /usr/loc
 **NOTE:** You must change the above command depending on where your plugin is stored. If you have a different folder in `$PATH` to store shell scripts, symlink it to there instead of `/usr/local/bin`.
 
 Use sxhkd to call `change-split-or-window $DIRECTION`, where `$DIRECTION` is either `west`, `south`, `north`, or `east`. This will focus the split in the given direction if in vim, or if not in vim, call `bspc` to focus the window in the given direction.
+
+`~/.config/sxhkd/sxhkdrc`:
 ```
 mod4 + {h,j,k,l}
     change-split-or-window {west,south,north,east}
