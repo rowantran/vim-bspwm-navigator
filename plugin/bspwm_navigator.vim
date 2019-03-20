@@ -40,6 +40,6 @@ function! s:BspwmAwareNavigate(direction)
         endif
 
         let cmd = 'bspc node -f ' . bspc_direction
-        system(cmd)
+        call system(cmd)
     endif
 endfunction
