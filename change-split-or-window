@@ -1,0 +1,24 @@
+#!/bin/sh
+
+window=$(xdotool getwindowfocus getwindowname)
+if [ "$window" = "vim" ]
+then
+    case "$1" in
+        west)
+            keysym="h"
+            ;;
+        south)
+            keysym="j"
+            ;;
+        north)
+            keysym="k"
+            ;;
+        east)
+            keysym="l"
+            ;;
+    esac
+
+    xdotool keyup super+$keysym key ctrl+$keysym
+else
+    bspc node -f $1
+fi
