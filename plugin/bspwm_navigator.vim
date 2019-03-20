@@ -30,13 +30,16 @@ function! s:BspwmAwareNavigate(direction)
     let at_tab_page_edge = (nr == winnr())
     if at_tab_page_edge
         if a:direction ==? 'h'
-            system("bspc node -f west")
+            let bspc_direction = 'west'
         elseif a:direction ==? 'j'
-            system("bspc node -f south")
+            let bspc_direction = 'south'
         elseif a:direction ==? 'k'
-            system("bspc node -f north")
+            let bspc_direction = 'north'
         elseif a:direction ==? 'l'
-            system("bspc node -f east")
+            let bspc_direction = 'east'
         endif
+
+        let cmd = 'bspc node -f ' . bspc_direction
+        system(cmd)
     endif
 endfunction
