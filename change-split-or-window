@@ -4,7 +4,8 @@
 # If in vim window, forward ctrl-[h, j, k, l], otherwise tell bspwm to focus window in given direction
 
 window=$(xdotool getwindowfocus getwindowname)
-if [ "$window" = "vim" ]
+window_grep=$(echo "$window" | grep -E "^n?vim$" -)
+if [ -n "${window_grep}" ]
 then
     case "$1" in
         west)
@@ -21,7 +22,7 @@ then
             ;;
     esac
 
-    xdotool keyup super+$keysym key ctrl+$keysym
+    xdotool keyup "${keysym}" key --clearmodifiers "control+${keysym}"
 else
     bspc node -f $1
 fi
