@@ -26,7 +26,7 @@ command! BspwmNavigateEast call s:BspwmAwareNavigate('l')
 function! s:BspwmAwareNavigate(direction)
     let nr = winnr()
     call s:VimNavigate(a:direction)
-    
+
     let at_tab_page_edge = (nr == winnr())
     if at_tab_page_edge
         if a:direction ==? 'h'
@@ -39,7 +39,6 @@ function! s:BspwmAwareNavigate(direction)
             let bspc_direction = 'east'
         endif
 
-        let cmd = 'bspc node -f ' . bspc_direction
-        call system(cmd)
+        call system(['bspc', 'node', '-f', bspc_direction])
     endif
 endfunction
