@@ -1,10 +1,10 @@
 #!/bin/sh
 
 # Call with direction [west, south, north, or east] from sxhkd
-# If in vim window, forward ctrl-[h, j, k, l], otherwise tell bspwm to focus window in given direction
+# If in vim or tmux, forward ctrl-[h, j, k, l], otherwise tell bspwm to focus window in given direction
 
 window=$(xdotool getwindowfocus getwindowname)
-window_grep=$(echo "$window" | grep -iE "(^|\s+)n?vim$" -)
+window_grep=$(echo "$window" | grep -iE "(^|\s+)(n?vim|tmux\s+a)$" -)
 if [ -n "${window_grep}" ]; then
 	case "$1" in
 	west)
