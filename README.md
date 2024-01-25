@@ -1,6 +1,6 @@
-# Vim Bspwm Navigator
+# Vim / Bspwm / Tmux Navigator
 
-This plugin provides a means of sharing keybinds between bspwm and vim, allowing Super + HJKL to navigate both between system windows and vim windows. The overall structure and the vim plugin are adapted from [Chris Toomey's Vim Tmux Navigator](https://github.com/christoomey/vim-tmux-navigator).
+This plugin provides a means of sharing keybinds between bspwm, vim and tmux, allowing Super + HJKL to navigate both between system windows and vim windows. The overall structure and the vim plugin are adapted from [Chris Toomey's Vim Tmux Navigator](https://github.com/christoomey/vim-tmux-navigator) and [Rowan Tran Vim Bspwm Navigator](https://github.com/rowantran/vim-bspwm-navigator).
 
 ## Installation
 ### Dependencies
@@ -11,7 +11,7 @@ You will need `xdotool` installed. Check your distribution's repos for this; mos
 ### Vim
 Use your preferred package manager to install the Vim plugin, e.g. using [vim-plug](https://github.com/junegunn/vim-plug):
 ```
-Plug 'rowantran/vim-bspwm-navigator'
+Plug 'joaopedroaat/vim-bspwm-tmux-navigator'
 ```
 Then run `:PlugInstall`.
 
