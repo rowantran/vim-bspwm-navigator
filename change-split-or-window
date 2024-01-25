@@ -5,24 +5,23 @@
 
 window=$(xdotool getwindowfocus getwindowname)
 window_grep=$(echo "$window" | grep -iE "(^|\s+)n?vim$" -)
-if [ -n "${window_grep}" ]
-then
-    case "$1" in
-        west)
-            keysym="h"
-            ;;
-        south)
-            keysym="j"
-            ;;
-        north)
-            keysym="k"
-            ;;
-        east)
-            keysym="l"
-            ;;
-    esac
+if [ -n "${window_grep}" ]; then
+	case "$1" in
+	west)
+		keysym="h"
+		;;
+	south)
+		keysym="j"
+		;;
+	north)
+		keysym="k"
+		;;
+	east)
+		keysym="l"
+		;;
+	esac
 
-    xdotool keyup "${keysym}" key --clearmodifiers "control+${keysym}"
+	xdotool keyup "${keysym}" key --clearmodifiers "control+${keysym}"
 else
-    bspc node -f $1
+	bspc node -f $1
 fi
