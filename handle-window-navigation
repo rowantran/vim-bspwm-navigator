@@ -4,7 +4,7 @@
 # If in vim or tmux, forward ctrl-[h, j, k, l], otherwise tell bspwm to focus window in given direction
 
 window=$(xdotool getwindowfocus getwindowname)
-window_grep=$(echo "$window" | grep -iE "(^|\s+)(n?vim|tmux\s+a)$" -)
+window_grep=$(echo "$window" | grep -iE "(^|\s+)(n?vim|tmux(\sa)?)$" -)
 if [ -n "${window_grep}" ]; then
 	case "$1" in
 	west)
