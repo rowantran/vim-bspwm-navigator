@@ -7,13 +7,13 @@ is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
 
 CURRENT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 tmux bind-key -n C-h if "$is_vim" \
-	"send-keys C-h" "run '$CURRENT_DIR/scripts/tmux-key-forwarder h'"
+	"send-keys C-h" "run '$CURRENT_DIR/scripts/handle-tmux-navigation h'"
 tmux bind-key -n C-j if "$is_vim" \
-	"send-keys C-j" "run '$CURRENT_DIR/scripts/tmux-key-forwarder j'"
+	"send-keys C-j" "run '$CURRENT_DIR/scripts/handle-tmux-navigation j'"
 tmux bind-key -n C-k if "$is_vim" \
-	"send-keys C-k" "run '$CURRENT_DIR/scripts/tmux-key-forwarder k'"
+	"send-keys C-k" "run '$CURRENT_DIR/scripts/handle-tmux-navigation k'"
 tmux bind-key -n C-l if "$is_vim" \
-	"send-keys C-l" "run '$CURRENT_DIR/scripts/tmux-key-forwarder l'"
+	"send-keys C-l" "run '$CURRENT_DIR/scripts/handle-tmux-navigation l'"
 
 tmux_version="$(tmux -V | sed -En "$version_pat")"
 tmux setenv -g tmux_version "$tmux_version"
