@@ -1,7 +1,28 @@
 if exists("g:loaded_bspwm_navigator") || &cp || v:version < 700
   finish
 endif
+
 let g:loaded_bspwm_navigator = 1
+
+if !get(g:, 'bspwm_navigator_no_mappings', 0)
+  noremap <silent> <c-h> :<C-U>BspwmNavigateLeft<cr>
+  noremap <silent> <c-j> :<C-U>BspwmNavigateDown<cr>
+  noremap <silent> <c-k> :<C-U>BspwmNavigateUp<cr>
+  noremap <silent> <c-l> :<C-U>BspwmNavigateRight<cr>
+endif
+
+if empty($TMUX)
+  command! BspwmNavigateLeft call s:VimNavigate('h')
+  command! BspwmNavigateDown call s:VimNavigate('j')
+  command! BspwmNavigateUp call s:VimNavigate('k')
+  command! BspwmNavigateRight call s:VimNavigate('l')
+  finish
+endif
+
+command! BspwmNavigateLeft call s:BspwmAwareNavigate('h')
+command! BspwmNavigateDown call s:BspwmAwareNavigate('j')
+command! BspwmNavigateUp call s:BspwmAwareNavigate('k')
+command! BspwmNavigateRight call s:BspwmAwareNavigate('l')
 
 function! s:VimNavigate(direction)
   try
@@ -10,18 +31,6 @@ function! s:VimNavigate(direction)
     echohl ErrorMsg | echo 'E11: Invalid in command-line window; <CR> executes, CTRL-C quits: wincmd k' | echohl None
   endtry
 endfunction
-
-if !get(g:, 'bspwm_navigator_no_mappings', 0)
-  noremap <silent> <c-h> :BspwmNavigateWest<cr>
-  noremap <silent> <c-j> :BspwmNavigateSouth<cr>
-  noremap <silent> <c-k> :BspwmNavigateNorth<cr>
-  noremap <silent> <c-l> :BspwmNavigateEast<cr>
-endif
-
-command! BspwmNavigateWest call s:BspwmAwareNavigate('h')
-command! BspwmNavigateSouth call s:BspwmAwareNavigate('j')
-command! BspwmNavigateNorth call s:BspwmAwareNavigate('k')
-command! BspwmNavigateEast call s:BspwmAwareNavigate('l')
 
 function! s:HandleNavigationOnTmux(direction)
   if a:direction ==? 'h'
