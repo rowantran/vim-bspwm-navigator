@@ -20,40 +20,57 @@ using [vim-plug](https://github.com/junegunn/vim-plug):
 Plug "joaopedroaat/vim-bspwm-tmux-navigator"
 ```
 
-using [lazy](https://github.com/folke/lazy.nvim)
+**NOTE:** Ensure that `ctrl-h`, `ctrl-j`, `ctrl-k`, and `ctrl-l` are _not_ bound to any commands in vim.
+
+using [lazy](https://github.com/folke/lazy.nvim):
 
 ```lua
-return { "joaopedroaat/vim-bspwm-tmux-navigator" }
+return {
+  "joaopedroaat/vim-bspwm-tmux-navigator",
+  cmd = {
+    "BspwmNavigateLeft",
+    "BspwmNavigateDown",
+    "BspwmNavigateUp",
+    "BspwmNavigateRight",
+    "BspwmNavigatePrevious",
+  },
+  keys = {
+    { "<c-h>", "<cmd><C-U>BspwmNavigateLeft<cr>" },
+    { "<c-j>", "<cmd><C-U>BspwmNavigateDown<cr>" },
+    { "<c-k>", "<cmd><C-U>BspwmNavigateUp<cr>" },
+    { "<c-l>", "<cmd><C-U>BspwmNavigateRight<cr>" },
+  },
+}
 ```
 
-**NOTE:** Ensure that `ctrl-h`, `ctrl-j`, `ctrl-k`, and `ctrl-l` are _not_ bound to any commands in vim.
+
 
 ### bspwm/sxhkd
 
-Symlink `handle-window-navigation` to somewhere in your `$PATH`, e.g.
+Symlink `scripts/handle-bspwm-navigation` to somewhere in your `$PATH`, e.g.
 
 using [vim-plug](https://github.com/junegunn/vim-plug):
 
 ```bash
-ln -s ~/.config/nvim/plugged/vim-bspwm-navigator/handle-window-navigation /usr/local/bin/handle-window-navigation
-chmod +x /usr/local/bin/handle-window-navigation
+ln -s ~/.config/nvim/plugged/vim-bspwm-tmux-navigator/scripts/handle-bspwm-navigation /usr/local/bin/handle-bspwm-navigation
+chmod +x /usr/local/bin/handle-bspwm-navigation
 ```
 
 using [lazy](https://github.com/folke/lazy.nvim)
 
 ```bash
-ln -s ~/.local/share/nvim/lazy/vim-bspwm-tmux-navigator/handle-window-navigation /usr/local/bin/handle-window-navigation
-chmod +x /usr/local/bin/handle-window-navigation
+ln -s ~/.local/share/nvim/lazy/vim-bspwm-tmux-navigator/scripts/handle-bspwm-navigation /usr/local/bin/handle-bspwm-navigation
+chmod +x /usr/local/bin/handle-bspwm-navigation
 ```
 
 **NOTE:** You must change the above command depending on where your plugin is stored. If you have a different folder in `$PATH` to store shell scripts, symlink it to there instead of `/usr/local/bin`.
 
-Use sxhkd to invoke `handle-window-navigation $DIRECTION`, where `$DIRECTION` can be: `west`, `south`, `north` or `east`.
+Use sxhkd to invoke `handle-bspwm-navigation $DIRECTION`, where `$DIRECTION` can be: `west`, `south`, `north` or `east`.
 `~/.config/sxhkd/sxhkdrc`:
 
 ```bash
 super + {h,j,k,l}
-    handle-window-navigation {west,south,north,east}
+    handle-bspwm-navigation {west,south,north,east}
 ```
 
 Ensure that you remove any conflicting keybinds.
