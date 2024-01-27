@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+movement=$1
+
+case "$movement" in
+'h')
+	isEdgePane=$(tmux display -p "#{pane_at_left}")
+	if [ "$isEdgePane" -eq 1 ]; then
+		bspc node -f west &>/dev/null || true
+	else
+		tmux select-pane -L
+	fi
+	;;
+'j')
+	isEdgePane=$(tmux display -p "#{pane_at_bottom}")
+	if [ "$isEdgePane" -eq 1 ]; then
+		bspc node -f south &>/dev/null || true
+	else
+		tmux select-pane -D
+	fi
+	;;
+'k')
+	isEdgePane=$(tmux display -p "#{pane_at_top}")
+	if [ "$isEdgePane" -eq 1 ]; then
+		bspc node -f north &>/dev/null || true
+	else
+		tmux select-pane -U
+	fi
+	;;
+'l')
+	isEdgePane=$(tmux display -p "#{pane_at_right}")
+	if [ "$isEdgePane" -eq 1 ]; then
+		bspc node -f east &>/dev/null || true
+	else
+		tmux select-pane -R
+	fi
+	;;
+esac

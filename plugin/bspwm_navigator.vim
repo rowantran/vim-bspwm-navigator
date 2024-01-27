@@ -25,13 +25,33 @@ command! BspwmNavigateEast call s:BspwmAwareNavigate('l')
 
 function! s:HandleNavigationOnTmux(direction)
   if a:direction ==? 'h'
-    execute 'TmuxNavigateLeft'
+    let isEdgePane = system("tmux display -p '#{pane_at_left}'")
+    if isEdgePane
+      call s:HandleNavigationOnBspwm(a:direction)
+    else 
+      silent call system('tmux select-pane -L')
+    endif 
   elseif a:direction ==? 'j'
-    execute 'TmuxNavigateDown'
+    let isEdgePane = system("tmux display -p '#{pane_at_bottom}'")
+    if isEdgePane
+      call s:HandleNavigationOnBspwm(a:direction)
+    else 
+      silent call system('tmux select-pane -D')
+    endif 
   elseif a:direction ==? 'k'
-    execute 'TmuxNavigateUp'
+    let isEdgePane = system("tmux display -p '#{pane_at_top}'")
+    if isEdgePane
+      call s:HandleNavigationOnBspwm(a:direction)
+    else 
+      silent call system('tmux select-pane -U')
+    endif 
   elseif a:direction ==? 'l'
-    execute 'TmuxNavigateRight'
+    let isEdgePane = system("tmux display -p '#{pane_at_right}'")
+    if isEdgePane
+      call s:HandleNavigationOnBspwm(a:direction)
+    else 
+      silent call system('tmux select-pane -R')
+    endif 
   endif
 endfunction
 
